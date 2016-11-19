@@ -32,8 +32,8 @@
     <bytecodeTargetLevel>
       <module name="base" target="1.8" />
       <module name="models" target="1.8" />
-      <module name="ProjectSAM" target="1.8" />
       <module name="rest" target="1.8" />
+      <module name="sam" target="1.8" />
       <module name="services" target="1.8" />
       <module name="storage" target="1.8" />
     </bytecodeTargetLevel>
