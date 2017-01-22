@@ -9,6 +9,8 @@ import ro.uaic.feaa.enums.IssueType;
 import ro.uaic.feaa.enums.Priority;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "project_feature")
@@ -16,7 +18,7 @@ public class Feature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "feature_title", nullable = false)
@@ -49,6 +51,7 @@ public class Feature {
     private Person reporter;
 
     @ManyToOne
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -66,6 +69,31 @@ public class Feature {
 
     @Column(name = "comment")
     private String comment;
+
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "feature")
+    private Set<SubFeature> subFeatures = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Feature{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", state=" + state +
+                ", storyPoints=" + storyPoints +
+                ", issueType=" + issueType +
+                ", asignee=" + asignee +
+                ", reporter=" + reporter +
+                ", project=" + project +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", sprint=" + sprint +
+                ", comment='" + comment + '\'' +
+                ", subFeatures=" + subFeatures +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -177,5 +205,57 @@ public class Feature {
 
     public void setIssueType(IssueType issueType) {
         this.issueType = issueType;
+    }
+
+    public Set<SubFeature> getSubFeatures() {
+        return subFeatures;
+    }
+
+    public void setSubFeatures(Set<SubFeature> subFeatures) {
+        this.subFeatures = subFeatures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Feature feature = (Feature) o;
+
+        if (id != null ? !id.equals(feature.id) : feature.id != null) return false;
+        if (title != null ? !title.equals(feature.title) : feature.title != null) return false;
+        if (description != null ? !description.equals(feature.description) : feature.description != null) return false;
+        if (priority != feature.priority) return false;
+        if (state != feature.state) return false;
+        if (storyPoints != null ? !storyPoints.equals(feature.storyPoints) : feature.storyPoints != null) return false;
+        if (issueType != feature.issueType) return false;
+        if (asignee != null ? !asignee.equals(feature.asignee) : feature.asignee != null) return false;
+        if (reporter != null ? !reporter.equals(feature.reporter) : feature.reporter != null) return false;
+        if (project != null ? !project.equals(feature.project) : feature.project != null) return false;
+        if (created != null ? !created.equals(feature.created) : feature.created != null) return false;
+        if (updated != null ? !updated.equals(feature.updated) : feature.updated != null) return false;
+        if (sprint != null ? !sprint.equals(feature.sprint) : feature.sprint != null) return false;
+        if (comment != null ? !comment.equals(feature.comment) : feature.comment != null) return false;
+        return subFeatures != null ? subFeatures.equals(feature.subFeatures) : feature.subFeatures == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (priority != null ? priority.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (storyPoints != null ? storyPoints.hashCode() : 0);
+        result = 31 * result + (issueType != null ? issueType.hashCode() : 0);
+        result = 31 * result + (asignee != null ? asignee.hashCode() : 0);
+        result = 31 * result + (reporter != null ? reporter.hashCode() : 0);
+        result = 31 * result + (project != null ? project.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (updated != null ? updated.hashCode() : 0);
+        result = 31 * result + (sprint != null ? sprint.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (subFeatures != null ? subFeatures.hashCode() : 0);
+        return result;
     }
 }

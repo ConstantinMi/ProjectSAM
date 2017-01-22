@@ -1,18 +1,17 @@
 package ro.uaic.feaa.models;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
-
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "username", nullable = false)
@@ -23,6 +22,23 @@ public class Users {
 
     @Column(name = "enabled")
     private Boolean enabled;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_project",
+            joinColumns =         @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, updatable = false),
+            inverseJoinColumns =  @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false, updatable = false)
+    )    private Set<Project> projects = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", projects=" + projects +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -54,5 +70,37 @@ public class Users {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Users users = (Users) o;
+
+        if (id != null ? !id.equals(users.id) : users.id != null) return false;
+        if (username != null ? !username.equals(users.username) : users.username != null) return false;
+        if (password != null ? !password.equals(users.password) : users.password != null) return false;
+        if (enabled != null ? !enabled.equals(users.enabled) : users.enabled != null) return false;
+        return projects != null ? projects.equals(users.projects) : users.projects == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (enabled != null ? enabled.hashCode() : 0);
+        result = 31 * result + (projects != null ? projects.hashCode() : 0);
+        return result;
     }
 }

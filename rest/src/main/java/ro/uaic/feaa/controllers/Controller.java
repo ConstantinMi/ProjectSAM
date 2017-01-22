@@ -21,11 +21,11 @@ public class Controller {
     }
 
     @RequestMapping(path = "/me",method = RequestMethod.GET)
-    @ResponseBody
     public Users getUser() {
         Users user = new Users();
         user.setUsername("claudiu");
         user.setPassword("parola");
+        user.setEnabled(true);
         return user;
     }
 

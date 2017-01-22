@@ -46,6 +46,4 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
-
 </beans>

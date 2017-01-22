@@ -15,7 +15,7 @@ public class SubFeature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
@@ -54,6 +54,23 @@ public class SubFeature {
 
     @Column(name = "comment")
     private String comment;
+
+    @Override
+    public String toString() {
+        return "SubFeature{" +
+                "id=" + id +
+                ", feature=" + feature +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", state=" + state +
+                ", issueType=" + issueType +
+                ", asignee=" + asignee +
+                ", reporter=" + reporter +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -141,5 +158,41 @@ public class SubFeature {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SubFeature that = (SubFeature) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (feature != null ? !feature.equals(that.feature) : that.feature != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (state != that.state) return false;
+        if (issueType != that.issueType) return false;
+        if (asignee != null ? !asignee.equals(that.asignee) : that.asignee != null) return false;
+        if (reporter != null ? !reporter.equals(that.reporter) : that.reporter != null) return false;
+        if (created != null ? !created.equals(that.created) : that.created != null) return false;
+        if (updated != null ? !updated.equals(that.updated) : that.updated != null) return false;
+        return comment != null ? comment.equals(that.comment) : that.comment == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (feature != null ? feature.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (issueType != null ? issueType.hashCode() : 0);
+        result = 31 * result + (asignee != null ? asignee.hashCode() : 0);
+        result = 31 * result + (reporter != null ? reporter.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (updated != null ? updated.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
     }
 }
