@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ro.uaic.feaa.exceptions.*;
 import ro.uaic.feaa.exceptions.exception.template.BadRequestException;
-import ro.uaic.feaa.exceptions.exception.template.GenericException;
 import ro.uaic.feaa.exceptions.exception.template.NotFoundException;
 
 /**
@@ -65,4 +64,10 @@ public class GlobalExceptionController {
         return new NotFoundException().handleException(ex);
     }
 
+    @ExceptionHandler(SubFeatureNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public CustomGenericMessage handletSubFeatureNotFoundEx(SubFeatureNotFoundException ex) {
+        return new NotFoundException().handleException(ex);
+    }
 }

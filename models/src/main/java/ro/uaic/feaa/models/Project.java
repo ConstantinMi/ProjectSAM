@@ -19,8 +19,7 @@ public class Project {
     @Column(name = "name")
     private String name;
 
-    @Fetch(FetchMode.JOIN)
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<Feature> features = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projects")
@@ -76,17 +75,13 @@ public class Project {
         Project project = (Project) o;
 
         if (id != null ? !id.equals(project.id) : project.id != null) return false;
-        if (name != null ? !name.equals(project.name) : project.name != null) return false;
-        if (features != null ? !features.equals(project.features) : project.features != null) return false;
-        return users != null ? users.equals(project.users) : project.users == null;
+        return name != null ? name.equals(project.name) : project.name == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (features != null ? features.hashCode() : 0);
-        result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
 }

@@ -5,21 +5,23 @@ import org.springframework.web.bind.annotation.*;
 import ro.uaic.feaa.dto.PersonDTO;
 import ro.uaic.feaa.services.IPersonService;
 
+import java.security.Principal;
+
 @RestController
-@RequestMapping("/users/{username:.+}/personalDetails")
+@RequestMapping("/users/me/personalDetails")
 public class PersonsController {
 
     @Autowired
     private IPersonService personService;
 
     @RequestMapping(method = RequestMethod.PUT)
-    public PersonDTO addPersonDetails(@PathVariable String username, @RequestBody PersonDTO personDTO) {
-        return personService.update(username, personDTO);
+    public PersonDTO addPersonDetails(Principal principal, @RequestBody PersonDTO personDTO) {
+        return personService.update(principal.getName(), personDTO);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public PersonDTO getPersonDetails(@PathVariable String username) {
-        return personService.getPersonDetails(username);
+    public PersonDTO getPersonDetails(Principal principal) {
+        return personService.getPersonDetails(principal.getName());
     }
 
 }

@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.*;
 import ro.uaic.feaa.dto.FeatureDTO;
 import ro.uaic.feaa.services.IFeatureService;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
  * Created by Claudiu on 1/12/2017.
  */
 @RestController
-@RequestMapping("/{username:.+}/projects/{projectName}")
+@RequestMapping("/me/projects/{projectName}")
 public class FeatureController {
 
     @Autowired
@@ -23,11 +24,11 @@ public class FeatureController {
     }
 
     @RequestMapping(path = "/sprint/{sprintId}/features", method = RequestMethod.POST)
-    public FeatureDTO addFeature(@PathVariable String username,
+    public FeatureDTO addFeature(Principal principal,
                                  @PathVariable String projectName,
                                  @PathVariable Long sprintId,
                                  @RequestBody FeatureDTO featureDTO) {
-        return featureService.addFeature(username, projectName, sprintId, featureDTO);
+        return featureService.addFeature(principal.getName(), projectName, sprintId, featureDTO);
     }
 
     @RequestMapping(path = "/features/{featureId}", method = RequestMethod.DELETE)

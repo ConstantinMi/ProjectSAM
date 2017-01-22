@@ -2,6 +2,7 @@ package ro.uaic.feaa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ro.uaic.feaa.dto.FeatureDTO;
 import ro.uaic.feaa.dto.ProjectDTO;
 import ro.uaic.feaa.dto.UsersDTO;
 import ro.uaic.feaa.models.Project;
@@ -22,6 +23,11 @@ public class ProjectController {
     @RequestMapping(path = "/{projectName}", method = RequestMethod.GET)
     public ProjectDTO getProject(@PathVariable String projectName) {
         return projectService.getProject(projectName);
+    }
+
+    @RequestMapping(path = "/{projectName}/features", method = RequestMethod.GET)
+    public List<FeatureDTO> getFeaturesForProject(@PathVariable String projectName) {
+        return projectService.getProjectsFeatures(projectName);
     }
 
     @RequestMapping(method = RequestMethod.GET)

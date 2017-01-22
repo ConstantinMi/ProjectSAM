@@ -6,6 +6,7 @@ import ro.uaic.feaa.dto.UsersDTO;
 import ro.uaic.feaa.services.IUserService;
 import ro.uaic.feaa.services.impl.UserServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,9 +21,9 @@ public class UsersController {
         return userService.addUser(usersDTO);
     }
 
-    @RequestMapping(path = "/{username:.+}", method = RequestMethod.GET)
-    public UsersDTO getUserByUsername(@PathVariable String username) {
-        return userService.findUserByUsername(username);
+    @RequestMapping(path = "/me", method = RequestMethod.GET)
+    public UsersDTO getUserByUsername(Principal principal) {
+        return userService.findUserByUsername(principal.getName());
     }
 
     @RequestMapping(method = RequestMethod.GET)

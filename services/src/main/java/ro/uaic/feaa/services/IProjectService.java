@@ -1,5 +1,6 @@
 package ro.uaic.feaa.services;
 
+import ro.uaic.feaa.dto.FeatureDTO;
 import ro.uaic.feaa.dto.ProjectDTO;
 import ro.uaic.feaa.dto.UsersDTO;
 
@@ -21,4 +22,6 @@ public interface IProjectService {
     void addUserToProject(String username, String projectName);
 
     ProjectDTO getProject(String projectName);
+
+    List<FeatureDTO> getProjectsFeatures(String projectName);
 }

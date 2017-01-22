@@ -3,6 +3,7 @@ package ro.uaic.feaa.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.uaic.feaa.dto.FeatureDTO;
 import ro.uaic.feaa.dto.ProjectDTO;
 import ro.uaic.feaa.dto.UsersDTO;
 import ro.uaic.feaa.exceptions.ProjectNotFoundException;
@@ -10,6 +11,7 @@ import ro.uaic.feaa.exceptions.UniqueProjectException;
 import ro.uaic.feaa.models.Project;
 import ro.uaic.feaa.models.Users;
 import ro.uaic.feaa.services.IProjectService;
+import ro.uaic.feaa.services.utils.FeatureUtils;
 import ro.uaic.feaa.services.utils.ProjectUserUtils;
 import ro.uaic.feaa.services.utils.ProjectUtils;
 import ro.uaic.feaa.storage.IProjectDAO;
@@ -92,5 +94,11 @@ public class ProjectServiceImpl implements IProjectService {
             return ProjectUtils.fromModelToDTO(existingProject.get());
         } else
             throw new ProjectNotFoundException("No project found with the specified name");
+    }
+
+    @Override
+    public List<FeatureDTO> getProjectsFeatures(String projectName) {
+        return projectDAO.findByName(projectName).get().getFeatures()
+                .stream().map(FeatureUtils::fromModelTODTO).collect(Collectors.toList());
     }
 }

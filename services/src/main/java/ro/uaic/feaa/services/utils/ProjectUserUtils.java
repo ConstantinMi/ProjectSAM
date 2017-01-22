@@ -25,10 +25,9 @@ public class ProjectUserUtils {
     public List<UsersDTO> getUsersDTOByIds(List<Long> userIds) {
         List<Users> users = new ArrayList<>();
 
-        for (Long id : userIds) {
-            if (usersDAO.findById(id).isPresent())
-            users.add(usersDAO.findById(id).get());
-        }
+        userIds.forEach(id -> {
+            usersDAO.findById(id).ifPresent(users::add);
+        });
 
         return users.stream().map(usersUtils::fromModelToDTO).collect(Collectors.toList());
     }

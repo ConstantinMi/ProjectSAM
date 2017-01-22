@@ -1,8 +1,10 @@
 package ro.uaic.feaa.services.utils;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 import ro.uaic.feaa.dto.FeatureDTO;
 import ro.uaic.feaa.dto.ProjectDTO;
+import ro.uaic.feaa.dto.SubFeatureDTO;
 import ro.uaic.feaa.enums.FeatureState;
 import ro.uaic.feaa.enums.IssueType;
 import ro.uaic.feaa.enums.Priority;
@@ -40,6 +42,7 @@ public class FeatureUtils {
         feature.setState(FeatureState.valueOfKey(featureDTO.getState()));
         feature.setStoryPoints((int)(long)featureDTO.getStoryPoints());
         feature.setPriority(Priority.valueOfKey(featureDTO.getPriority()));
+        feature.setCreated(DateTime.now());
 
         return feature;
     }

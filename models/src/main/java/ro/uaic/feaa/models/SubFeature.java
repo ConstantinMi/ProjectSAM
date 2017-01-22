@@ -168,7 +168,6 @@ public class SubFeature {
         SubFeature that = (SubFeature) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (feature != null ? !feature.equals(that.feature) : that.feature != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (state != that.state) return false;
@@ -183,7 +182,6 @@ public class SubFeature {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (feature != null ? feature.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);

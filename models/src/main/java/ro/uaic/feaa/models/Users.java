@@ -90,8 +90,7 @@ public class Users {
         if (id != null ? !id.equals(users.id) : users.id != null) return false;
         if (username != null ? !username.equals(users.username) : users.username != null) return false;
         if (password != null ? !password.equals(users.password) : users.password != null) return false;
-        if (enabled != null ? !enabled.equals(users.enabled) : users.enabled != null) return false;
-        return projects != null ? projects.equals(users.projects) : users.projects == null;
+        return enabled != null ? enabled.equals(users.enabled) : users.enabled == null;
     }
 
     @Override
@@ -100,7 +99,6 @@ public class Users {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (enabled != null ? enabled.hashCode() : 0);
-        result = 31 * result + (projects != null ? projects.hashCode() : 0);
         return result;
     }
 }
