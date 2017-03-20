@@ -90,4 +90,16 @@ public class UserServiceImpl implements IUserService {
         Optional<Users> existingUser = usersDAO.findByUsername(username);
         return existingUser.map(usersUtils::fromModelToDTO).orElse(new UsersDTO());
     }
+
+    public void setUserDAO(IUsersDAO userDAO) {
+        this.usersDAO = userDAO;
+    }
+
+    public void setUserUtils(UsersUtils userUtils) {
+        this.usersUtils = userUtils;
+    }
+
+    public void setPersonService(IPersonService personService) {
+        this.personService = personService;
+    }
 }

@@ -1,5 +1,6 @@
 package ro.uaic.feaa.storage.impl;
 
+import org.springframework.stereotype.Repository;
 import ro.uaic.feaa.models.SubFeature;
 import ro.uaic.feaa.storage.ISubfeatureDAO;
 
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by Claudiu on 1/22/2017.
  */
+@Repository
 public class SubfeatureDAOImpl extends GenericHibernateDAO<SubFeature, Long> implements ISubfeatureDAO{
 
     public SubfeatureDAOImpl() {

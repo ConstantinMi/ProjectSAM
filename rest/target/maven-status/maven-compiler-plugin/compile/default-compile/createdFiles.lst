@@ -1,1 +1,8 @@
 ro\uaic\feaa\controllers\Controller.class
+ro\uaic\feaa\controllers\FeatureController.class
+ro\uaic\feaa\controllers\SprintController.class
+ro\uaic\feaa\controllers\UsersController.class
+ro\uaic\feaa\controllers\SubFeatureController.class
+ro\uaic\feaa\controllers\ProjectController.class
+ro\uaic\feaa\controllers\GlobalExceptionController.class
+ro\uaic\feaa\controllers\PersonsController.class

@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public class UsersDAOImpl extends GenericHibernateDAO<Users, Long> implements IUsersDAO{
 
-    UsersDAOImpl() {
+    public UsersDAOImpl() {
         super(Users.class);
     }
 
